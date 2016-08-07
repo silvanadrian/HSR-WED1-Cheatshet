@@ -1,0 +1,13 @@
+## Core latex/pdflatex auxiliary files:
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+_minted-WED1-SilvanAdrian-CheatSheet/
+*.pdf
+
+.DS_Store
