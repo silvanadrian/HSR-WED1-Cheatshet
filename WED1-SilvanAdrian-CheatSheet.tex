@@ -14,6 +14,43 @@
 
 \subsubsection{HTML}
 
+\textbf{HTML Document}
+ \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{html}
+<!DOCTYPE html><html lang="en"> 
+<head><title>First document</title><meta charset="utf­8" /> 
+ <meta name="Author" content="Wikipraktika" />
+  <meta name="Publisher" content="Wikipraktika" />
+  <meta name="Description" content="Taschenrechner - 
+  tragbare, handliche elektronische Rechenmaschine"/>
+</head><body><h1>A first document</h1><p>This is our first HTML­document.</p> 
+</body></html>
+\end{minted}
+
+\textbf{Formular}
+ \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{html}
+<form><fieldset><legend>Autor</legend>
+<label>Herr <input type="radio" name="gender" value="Herr"></label>
+<label>Name<input type="text" required=""></label>
+<label>E-Mail<input type="email" required=""></label>
+<label>Webseite</p><input type="url" required=""></label>
+<label>Geburtsdatum</p><input type="date" required=""></label>
+<label>Nationalität
+<select required="">
+<option value="Hello">Hello</option>
+</select>
+<label>
+<label>Profiltext<textarea rows="10"></textarea></label>
+<label>Profilbilder<input type="file"></label>
+</fieldset>
+<fieldset><legend>Rechtliches</legend>
+<label><input type="checkbox" value="Hello World">
+<span>Hello World</span></label>
+</fieldset>
+<button type="submit">Submit</button>
+<button type="reset">Reset</button>
+</form>
+\end{minted}
+
 \subsubsection{CSS}
 
 \subsubsection{JS}
