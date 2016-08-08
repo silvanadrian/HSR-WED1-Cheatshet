@@ -29,7 +29,7 @@
 
 \textbf{Formular}
  \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{html}
-<form action=''url'' method=''post''>
+<form action="url" method="post">
 <fieldset><legend>Autor</legend>
 <label>Herr <input type="radio" name="gender" value="Herr"></label>
 <label>Name<input type="text" required=""></label>
@@ -179,7 +179,7 @@ document.getElementById('inpt').onkeypress = function (event) {
 document.getElementById("songs").innerHTML=createSongsHtml(songs);
 \end{minted}
 
-\textbf{jQuery Selektoren}
+\subsubsection{jQuery Selektoren}
 
  \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{javascript}
  (function($) { })(jQuery);  //Vorgabe für NoConflict
@@ -194,6 +194,14 @@ $('#th > td').text() //Concat Text that belong to selector
 //jQuery Function Chaining
 $('#lblFormHeader').blur().hide();
  \end{minted}
+ 
+ \subsubsection{jQuery Events}
+  \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{javascript}
+$( '#target' ).click(function() {
+    alert( "Handler for .click() called." );
+});
+$('.haschibaschi').on('click | submit | event' , function() {});
+\end{minted}
 
 \subsubsection{HTTP + Node}
 \textbf{Etag}: Im HTTP Header nach dem ersten Request wird dieser eingefügt, zur 
@@ -224,6 +232,7 @@ request.setRequestHeader( "Content-Type",
     "application/x-www-form-urlencoded"
 ); 
 request.send(data);
+request.send(JSON.stringify(data)); //Send JSON
  \end{minted}
  
  \subsubsection{jQuery AJAX}
@@ -257,7 +266,7 @@ $.get( "ajax/test.html", function( data ) {
 });
 //JQuery POST
 $.post( "ajax/test.html", function( data ) {
-  $( ".result" ).html( data );
+  $( ".result" ).html( data ); //JSON.stringify(data)
 });
 //jQuery GetJSON
 $.getJSON( "/time").done(function(data)
@@ -270,6 +279,16 @@ $( "#result" ).load( "ajax/test.html", function() {
 
 
 \subsubsection{Template Engine}
+\begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{html}
+  {{#if books}}
+	<p>{{books.length}} Bücher vorhanden</p>
+{{else}}
+	<p>keine Bücher gefunden</p>
+{{/if}
+{{#each books}}
+  <p>{{title}}</p>
+{{/each}}
+\end{minted}
 
 
 \end{multicols*}
