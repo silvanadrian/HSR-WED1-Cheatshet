@@ -22,13 +22,15 @@
   <meta name="Publisher" content="Wikipraktika" />
   <meta name="Description" content="Taschenrechner - 
   tragbare, handliche elektronische Rechenmaschine"/>
+  <link rel="shortcut icon" type="image/gif" href="facepalm.gif" />
 </head><body><h1>A first document</h1><p>This is our first HTML­document.</p> 
 </body></html>
 \end{minted}
 
 \textbf{Formular}
  \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{html}
-<form><fieldset><legend>Autor</legend>
+<form action=''url'' method=''post''>
+<fieldset><legend>Autor</legend>
 <label>Herr <input type="radio" name="gender" value="Herr"></label>
 <label>Name<input type="text" required=""></label>
 <label>E-Mail<input type="email" required=""></label>
@@ -114,7 +116,157 @@ Umfang, Strategie.
 \end{multicols}
 %UCD
 \subsubsection{JS}
+ \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{javascript}
+ let arr = [3, 5, 7];
 
+for (let i in arr) {
+   console.log(i); // logs "0", "1", "2", "foo" z.B.: for JSON
+}
+
+for (let i of arr) {
+   console.log(i); // logs "3", "5", "7"
+}
+/* Funktionsübergabe an Function */
+function clock(seconds, action){
+    setTimeout(action, seconds * 1000);
+    console.log(`timer goes off in: ${seconds} seconds`);
+}
+clock(30, () => console.log("Hallo World"));
+/* Counter Function */
+function counter(start){
+    return (
+    {
+        incr : () =>  ++start,
+        decr : () =>  --start,
+        value : () => start
+    });
+}
+var c1 = counter(2);
+console.log("3:", c1.incr());
+console.log("4:", c1.incr());
+console.log("5:", c1.incr());
+console.log("5:", c1.value());
+console.log("4:", c1.decr());
+ \end{minted}
+
+\subsubsection{DOM+Events+jQuery}
+ \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{javascript}
+ document.querySelectorAll("h2")
+ window.addEventListener("load", function(){
+document.querySelector("input[value='Hello World']").
+addEventListener("click", function(){ console.log("File", "Hello World");});
+});
+var currencies = Array.prototype.slice.call
+(document.querySelectorAll("[data-currency]"));
+currencies.forEach(function(el) {
+    el.addEventListener("input",function(input){
+        var currentElement = this; // or input.target;
+        currencies.forEach(function(toChange){
+            if(toChange!=currentElement){
+                toChange.value = x ;
+            }
+        });
+    });
+}); 
+/* keypress Event (down, up)*/
+document.getElementById('inpt').onkeypress = function (event) {
+    var self = this;
+    setTimeout(function() {
+        self.value = self.value.toUpperCase()
+    }, 0)
+};
+/* Set innerHTML */
+document.getElementById("songs").innerHTML=createSongsHtml(songs);
+\end{minted}
+
+\textbf{jQuery Selektoren}
+
+ \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{javascript}
+ (function($) { })(jQuery);  //Vorgabe für NoConflict
+$('#head > title').text() );
+$('#td th').first().text() ); //first in #td th
+print( $('tr').length ); //count tr's
+print( $('#age').val() + 10 ); // add text 10 to val
+function() { if($('#sex').val()) { return "t"; } else { return "f"; } }()
+typeof($('#age2').val()-7) //number
+typeof($('#sex').html) //function
+$('#th > td').text() //Concat Text that belong to selector
+//jQuery Function Chaining
+$('#lblFormHeader').blur().hide();
+ \end{minted}
+
+\subsubsection{HTTP + Node}
+\textbf{Etag}: Im HTTP Header nach dem ersten Request wird dieser eingefügt, zur 
+Abklärung, ob das Bild bereits gecacht wurde 
+(bei einem weiteren Request und falls sich die Datei nicht geändert hat seit dem letzten 
+Aufruf wird ein 304 not Modified zurückgeschickt)
+
+\subsubsection{AJAX}
+\begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{javascript}
+//XHTMLHttpRequest GET (Example with getting time)
+// create new AJAX request
+var request = new XMLHttpRequest();
+// handle successfull response
+request.onreadystatechange = function() {
+    if (request.readyState == 4 && request.status == 200) {
+    } };
+// do something with 'request.responseText'
+window.alert(request.responseText); //JSON.parse(client.responseText)['time']
+// fire asynchronous AJAX request (true is default)
+request.open('GET', 'http://domain.tld/product-details', true); request.send();
+client.setRequestHeader('Accept','application/json'); //JSON
+request.send();
+//Post
+var data = "id=96&category=6";
+request.open("POST", url);
+// Content type necessary
+request.setRequestHeader( "Content-Type",
+    "application/x-www-form-urlencoded"
+); 
+request.send(data);
+ \end{minted}
+ 
+ \subsubsection{jQuery AJAX}
+ 
+\begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{javascript}
+  //Form Submit
+$(document).ready(function () {
+    var form = $('#contactForm');
+    // listen on form submit
+    form.on('submit', function(event) {
+        // send form data serializes (url encoded) by AJAX
+        $.post(form.attr('action'), form.serialize(), function(data) {
+            $('#status').get(0).innerHTML = data;
+            form.get(0).reset();
+        });
+        // disable form default action
+        event.preventDefault(); });
+});
+//$.ajax
+$.ajax({
+  type: "POST/GET/LOAD",
+  url: url,
+  data: data,
+  success: success,
+  dataType: dataType
+});
+//jQuery Get Request
+$.get( "ajax/test.html", function( data ) {
+    $( ".result" ).html( data );
+    alert( "Load was performed." );
+});
+//JQuery POST
+$.post( "ajax/test.html", function( data ) {
+  $( ".result" ).html( data );
+});
+//jQuery GetJSON
+$.getJSON( "/time").done(function(data)
+{onTimeAvailable(data['time']);}).fail(onTimeError);
+//jQuery load
+$( "#result" ).load( "ajax/test.html", function() {
+    alert( "Load was performed." );
+});
+\end{minted}
 
 
 \subsubsection{Template Engine}
