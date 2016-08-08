@@ -52,8 +52,70 @@
 \end{minted}
 
 \subsubsection{CSS}
+ \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{html}
+<link rel="stylesheet" href=''*.css" type="text/css" media="all | 
+screen | print">
+ \end{minted}
+ 
+\begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{css}
+/* Pseudeo Selecktoren */
+:after, :before, :first-child, :last-child, :last-of-type, :only-of-type {}
+ /* Examples */
+ul > li:nth-of-type(3n):not(:nth-of-type(even)){} /* nur alle direkten childs 
+von ul */
+a:not([href]){}
+h1 + p{} /* Auf gleicher Basis */
+body * h1{} /* Liegt nicht direkt im Body */
+p:before {content:attr(data-foo) " ";} /* Use :attr to read out Attribute and 
+set it in :before */
+[data-tooltip]:hover:after{ content:  attr(data-tooltip);} /* Selector on 
+Attribute */
+\end{minted}
 
+%usability
+\subsubsection{Usability}
+\begin{multicols}{2}
+ \includegraphics[width=0.120\textwidth]{images/usability-11}
+ \columnbreak
+ \textbf{ Effektivität:}
+Benutzer können ihre Ziele erreichen
+\textbf{ Effizienz: }
+Benutzer können ihre Ziele mit angemessenem Aufwand erreichen
+\textbf{Zufriedenheit:}
+Benutzer sind positiv gegenüber dem System eingestellt
+\end{multicols}
+
+\subsubsection{Prinzipien der Dialoggestaltung (ISO 9241-110)}
+
+\textbf{Aufgabenangemessenheit}Benutzer erledigen Aufgaben effektiv und effizient\textbf{Selbstbeschreibungsfähigkeit}Dialogschritte sind durch Beschreibungen oder Rückmeldungen verständlich oder werden erklärt\textbf{Steuerbarkeit}Benutzer kann Richtung und Geschwindigkeit der Interaktion beeinflussen\textbf{Erwartungskonformität}Dialog entspricht den Kenntnissen des Benutzers\textbf{Fehlertoleranz}Trotz erkennbar fehlerhafter Eingaben des Benutzers kann das Ziel effizient erreicht werden\textbf{Individualisierbarkeit}Interaktion kann angepasst werden\textbf{Lernförderlichkeit}Erlernen der Anwendung wird unterstützt
+\subsubsection{Stone et al. 2005}
+\textbf{Visibility:} Der erste Schritt zum Ziel ist sichtbar\textbf{Affordance:} (Begreifbarkeit) Aktionsresultat ist vorhersagbar
+\textbf{Feedback:} Es ist klar was passiert ist (oder passiert -> Animation)\textbf{Simplicity:} Nicht mehr als nötig für die Aufgabe\textbf{Structure:} Logische und konsistente Organisation\textbf{Consistency:} Vorhersagbarkeit durch Konsistenz
+\textbf{Tolerance:} Fehler vermeiden, Wiederherstellung vereinfachen\textbf{Accessibility:} Design für alle Personengruppen \& Situationen
+\subsubsection{Garret}
+\textbf{Oberfläche:} konkret Attraktiv, Vertrauenserweckend, .. “Hedonische Qualität“
+-> Graphic Design\textbf{Raster:} Erwartungskonform, Fehlertolerant, Effizient -> Interaktionsdesign mit Wireframes\textbf{Struktur} Aufgabengerecht, Fehlertolerant, Effizient-> Interaktionsdesign mit Szenarios -> Informationsarchitektur\textbf{Umfang} Zielgruppengerecht, Effektivität -> Anforderungsanalyse, Ziele, Aufgaben\textbf{Strategie}  Marktgerecht-> Marktanalyse, Zielgruppenanalyse
+%Usability
+%UCD
+\subsubsection{UCD}
+\begin{multicols}{2}
+\subsubsection{Cognitive Walktrough / Usability Testing}
+\tiny Ist eine je Methode zur Identifikation von Usability Problemen. Cognitive 
+Walktrough wird durchgeführt von 3 oder mehr Experten und Usability Testing 
+von 3 oder mehr zukünftigen Nutzer. Für Usability Testing braucht es noch kein 
+lauffähiges System, Screenshots reichen. Grösste Herausforderung bei Usability 
+Testing ist die Erstellung guter Aufgaben, bei welchen echte Benutzerziele getestet 
+werden ohne, dass Keywords verraten werden.
+\subsubsection{User Centered Design}
+Elemente der User Experience: Oberfläche (Aufmerksamkeiten, 
+Erkennung von Bekanntem), Raster (Responsive Design), Struktur (Usability), 
+Umfang, Strategie.
+\includegraphics[width=0.12\textwidth]{images/ucd}
+\end{multicols}
+%UCD
 \subsubsection{JS}
+
+
 
 \subsubsection{Template Engine}
 
