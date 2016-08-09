@@ -238,7 +238,8 @@ request.onreadystatechange = function() {
 // do something with 'request.responseText'
 window.alert(request.responseText); //JSON.parse(client.responseText)['time']
 // fire asynchronous AJAX request (true is default)
-request.open('GET', 'http://domain.tld/product-details', true); request.send();
+request.open('GET', 'http://domain.tld/product-details', true); 
+request.send();
 client.setRequestHeader('Accept','application/json'); //JSON
 request.send();
 //Post
@@ -337,6 +338,10 @@ $("#add").click(function(){
     };
     var template = $("#template");
     applyTemplate(template,data);
+});
+//Register Handelbar Helper
+Handlebars.registerHelper('date', function(date, format) {
+	return moment(date).format(format);
 });
 \end{minted}
 
