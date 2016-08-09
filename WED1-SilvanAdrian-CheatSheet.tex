@@ -51,6 +51,10 @@
 <button type="submit">Submit</button>
 <button type="reset">Reset</button>
 </form>
+<datalist id="search-suggestions">
+	<option value="Wings">Wings</option>
+</datalist>
+<input type="search" list="search-suggestions" />
 \end{minted}
 
 \subsubsection{CSS}
@@ -61,17 +65,24 @@
  
 \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{css}
 /* Pseudeo Selecktoren */
-:after, :before, :first-child, :last-child, :last-of-type, :only-of-type {}
+:after, :before, :first-child, :last-child, :last-of-type, :only-of-type,
+::first-line, ::first-letter {}
  /* Examples */
 ul > li:nth-of-type(3n):not(:nth-of-type(even)){} /* nur alle direkten childs 
 von ul */
 a:not([href]){}
 h1 + p{} /* Auf gleicher Basis */
+h1 ~ p {} /* Styles werden auf alle p in dieser Ebene angewandt 
+(wenn auch andere tags dazwischen)*/
 body * h1{} /* Liegt nicht direkt im Body */
 p:before {content:attr(data-foo) " ";} /* Use :attr to read out Attribute and 
 set it in :before */
 [data-tooltip]:hover:after{ content:  attr(data-tooltip);} /* Selector on 
 Attribute */
+[title~=besteht] {color: green;} /* Beinhaltet Alleinstehend'*/
+* /* Beinhaltet generell */  $  /* Steht am ende */ 
+| /* Startet Alleinstehend */  ^ /* Startet mit Wert */
+
 \end{minted}
 
 %usability
@@ -147,6 +158,12 @@ console.log("4:", c1.incr());
 console.log("5:", c1.incr());
 console.log("5:", c1.value());
 console.log("4:", c1.decr());
+//NaN (has Type Number)
+NaN == Nan //false check with isNan(var)
+parseFloat("1.2ab") //1.2
+parseInt("abc") //NaN
+var filteredArray = array.filter( elem => elem > 5); 
+console.log(array.every( elem => elem > 5));
  \end{minted}
 
 \subsubsection{DOM+Events+jQuery}
@@ -289,6 +306,41 @@ $( "#result" ).load( "ajax/test.html", function() {
   <p>{{title}}</p>
 {{/each}}
 \end{minted}
+
+\begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{javascript}
+ //Handlebars
+var appContainer = $('#app-container');
+
+function applyTemplate(templateSource, data) {
+	var template = Handlebars.compile(templateSource);
+	var view = template(data);
+	appContainer.html(view);
+}
+
+function renderResult(data) {
+	$.get(config.resultTemplateUrl, function(resultTemplateSource) {
+		applyTemplate(resultTemplateSource, data);
+	});
+}
+//Handlebars Example
+var viewRenderer = Handlebars.compile(productTemplate);
+var view = viewRenderer({ products: products });
+//Simple Template Engine without Handlebars
+function applyTemplate(template, dataObject) {
+    template.find('p').first().html("<p>Id: " + dataObject.id + "</p>");
+    template.find('p').last().html("<p>Name: " + dataObject.name + "</p>");
+}
+$("#add").click(function(){
+    var data = {
+        id: $("#id").val(),
+        name: $("#name").val()
+    };
+    var template = $("#template");
+    applyTemplate(template,data);
+});
+\end{minted}
+
+
 
 
 \end{multicols*}
