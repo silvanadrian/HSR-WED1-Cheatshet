@@ -87,16 +87,12 @@ Attribute */
 
 %usability
 \subsubsection{Usability}
-\begin{multicols}{2}
- \includegraphics[width=0.120\textwidth]{images/usability-11}
- \columnbreak
  \textbf{ Effektivität:}
 Benutzer können ihre Ziele erreichen
 \textbf{ Effizienz: }
 Benutzer können ihre Ziele mit angemessenem Aufwand erreichen
 \textbf{Zufriedenheit:}
 Benutzer sind positiv gegenüber dem System eingestellt
-\end{multicols}
 
 \subsubsection{Prinzipien der Dialoggestaltung (ISO 9241-110)}
 
@@ -111,7 +107,6 @@ Benutzer sind positiv gegenüber dem System eingestellt
 %Usability
 %UCD
 \subsubsection{UCD}
-\begin{multicols}{2}
 \subsubsection{Cognitive Walktrough / Usability Testing}
 \tiny Ist eine je Methode zur Identifikation von Usability Problemen. Cognitive 
 Walktrough wird durchgeführt von 3 oder mehr Experten und Usability Testing 
@@ -120,11 +115,10 @@ lauffähiges System, Screenshots reichen. Grösste Herausforderung bei Usability
 Testing ist die Erstellung guter Aufgaben, bei welchen echte Benutzerziele getestet 
 werden ohne, dass Keywords verraten werden.
 \subsubsection{User Centered Design}
-Elemente der User Experience: Oberfläche (Aufmerksamkeiten, 
-Erkennung von Bekanntem), Raster (Responsive Design), Struktur (Usability), 
-Umfang, Strategie.
-\includegraphics[width=0.12\textwidth]{images/ucd}
-\end{multicols}
+Elemente der User Experience: \textbf{Oberfläche} (Aufmerksamkeiten, 
+Erkennung von Bekanntem), \textbf{Raster} (Responsive Design), \textbf{Struktur} (Usability), 
+\textbf{Umfang} , \textbf{Strategie}.
+
 %UCD
 \subsubsection{JS}
  \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{javascript}
@@ -218,6 +212,11 @@ $( '#target' ).click(function() {
     alert( "Handler for .click() called." );
 });
 $('.haschibaschi').on('click | submit | event' , function() {});
+//reference Event handler
+$(".number").on("click", buttonNumClickHandler);
+function buttonNumClickHandler (event) {
+   input.text(input.text() + event.target.value);
+}
 \end{minted}
 
 \subsubsection{HTTP - Node}
