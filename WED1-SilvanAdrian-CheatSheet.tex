@@ -56,6 +56,10 @@
 </datalist>
 <input type="search" list="search-suggestions" />
 \end{minted}
+\textbf{Random HTML}
+ \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{html}
+   <object data="assets/images/zeitgewinn.svg" type="image/svg+xml"></object>
+ \end{minted}
 
 \subsubsection{CSS}
  \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{html}
@@ -243,11 +247,9 @@ client.setRequestHeader('Accept','application/json'); //JSON
 request.send();
 //Post
 var data = "id=96&category=6";
-request.open("POST", url);
+request.open("POST", "/time", true);
 // Content type necessary
-request.setRequestHeader( "Content-Type",
-    "application/x-www-form-urlencoded"
-); 
+request.setRequestHeader( "Content-Type","application/json;charset=UTF-8"); 
 request.send(data);
 request.send(JSON.stringify(data)); //Send JSON
  \end{minted}
@@ -342,6 +344,15 @@ $("#add").click(function(){
 Handlebars.registerHelper('date', function(date, format) {
 	return moment(date).format(format);
 });
+// Use Helper in HTML
+//<time datetime="{{date date 'YYYY-MM-DD HH:mm'}}">
+//{{date date 'DD/MM/YY HH:mm'}}</time>
+//Lower Handlebar Helper
+Handlebars.registerHelper('lower', function(value1, value2, options) {
+	return (Number(value1) < Number(value2)) ? 
+	options.fn(this) : options.inverse(this);
+});
+//{{lower zahl1 11}}
 \end{minted}
 
 
