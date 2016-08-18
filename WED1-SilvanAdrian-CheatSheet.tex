@@ -14,17 +14,13 @@
 
 \subsubsection{HTML}
 
-\textbf{HTML Document}
- \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{html}
-<!DOCTYPE html><html lang="en"> 
-<head><title>First document</title><meta charset="utf­8" /> 
+\textbf{HTML Meta}
+ \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{html}<meta charset="utf­8" /> 
  <meta name="Author" content="Wikipraktika" />
   <meta name="Publisher" content="Wikipraktika" />
   <meta name="Description" content="Taschenrechner - 
   tragbare, handliche elektronische Rechenmaschine"/>
   <link rel="shortcut icon" type="image/gif" href="facepalm.gif" />
-</head><body><h1>A first document</h1><p>This is our first HTML­document.</p> 
-</body></html>
 \end{minted}
 
 \textbf{Formular}
@@ -58,7 +54,10 @@
 \end{minted}
 \textbf{Random HTML}
  \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{html}
-   <object data="assets/images/zeitgewinn.svg" type="image/svg+xml"></object>
+<video poster="./poster.jpg" controls autoplay loop muted><source type="video/mp4" src="./video.mp4" /> 
+<source type="video/ogg" src="./video.ogg" /> 
+<a href="./video.mp4">Download example video</a></video>
+<object data="assets/images/zeitgewinn.svg" type="image/svg+xml"></object>
  \end{minted}
 
 \subsubsection{CSS}
@@ -91,12 +90,11 @@ Attribute */
 
 %usability
 \subsubsection{Usability}
- \textbf{ Effektivität:}
-Benutzer können ihre Ziele erreichen
+\textbf{ Effektivität:} Benutzer können ihre Ziele erreichen\\
 \textbf{ Effizienz: }
-Benutzer können ihre Ziele mit angemessenem Aufwand erreichen
+Benutzer können ihre Ziele mit angemessenem Aufwand erreichen \\
 \textbf{Zufriedenheit:}
-Benutzer sind positiv gegenüber dem System eingestellt
+Benutzer sind positiv gegenüber dem System eingestellt \\
 
 \subsubsection{Prinzipien der Dialoggestaltung (ISO 9241-110)}
 
@@ -126,12 +124,10 @@ Erkennung von Bekanntem), \textbf{Raster} (Responsive Design), \textbf{Struktur}
 %UCD
 \subsubsection{JS}
  \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{javascript}
- let arr = [3, 5, 7];
-
+let arr = [3, 5, 7];
 for (let i in arr) {
    console.log(i); // logs "0", "1", "2", "foo" z.B.: for JSON
 }
-
 for (let i of arr) {
    console.log(i); // logs "3", "5", "7"
 }
@@ -223,12 +219,6 @@ function buttonNumClickHandler (event) {
 }
 \end{minted}
 
-\subsubsection{HTTP - Node}
-\textbf{Etag}: Im HTTP Header nach dem ersten Request wird dieser eingefügt, zur 
-Abklärung, ob das Bild bereits gecacht wurde 
-(bei einem weiteren Request und falls sich die Datei nicht geändert hat seit dem letzten 
-Aufruf wird ein 304 not Modified zurückgeschickt)
-
 \subsubsection{AJAX}
 \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{javascript}
 //XHTMLHttpRequest GET (Example with getting time)
@@ -275,9 +265,9 @@ $.ajax({
   type: "POST/GET/LOAD",
   url: url,
   data: data,
-  success: success,
-  dataType: dataType
-});
+  success: success, //not when done used
+  dataType: dataType //''json"
+}).done(renderResult);
 //jQuery Get Request
 $.get( "ajax/test.html", function( data ) {
     $( ".result" ).html( data );
@@ -295,7 +285,6 @@ $( "#result" ).load( "ajax/test.html", function() {
     alert( "Load was performed." );
 });
 \end{minted}
-
 
 \subsubsection{Template Engine}
 \begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{html}
@@ -324,22 +313,6 @@ function renderResult(data) {
 		applyTemplate(resultTemplateSource, data);
 	});
 }
-//Handlebars Example
-var viewRenderer = Handlebars.compile(productTemplate);
-var view = viewRenderer({ products: products });
-//Simple Template Engine without Handlebars
-function applyTemplate(template, dataObject) {
-    template.find('p').first().html("<p>Id: " + dataObject.id + "</p>");
-    template.find('p').last().html("<p>Name: " + dataObject.name + "</p>");
-}
-$("#add").click(function(){
-    var data = {
-        id: $("#id").val(),
-        name: $("#name").val()
-    };
-    var template = $("#template");
-    applyTemplate(template,data);
-});
 //Register Handelbar Helper
 Handlebars.registerHelper('date', function(date, format) {
 	return moment(date).format(format);
@@ -354,6 +327,28 @@ Handlebars.registerHelper('lower', function(value1, value2, options) {
 });
 //{{lower zahl1 11}}
 \end{minted}
+\begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{javascript}
+(function($){ $(document).ready(function(){var appContainer = $('#app-container'); 
+function applyTemplate(templateSource, data) {  var template=Handlebars.compile(templateSource);
+  var view = template(data); 
+  appContainer.html(view);}function renderResult(data) {$.get(config.resultTemplateUrl, function(resultTemplateSource) {  applyTemplate(resultTemplateSource, data); });}function submitForm(event) {  var formData = serializeFormToObject($(event.target)); 
+  $.ajax({
+    type: 'POST',    url: config.apiUrl,    data: JSON.stringify(formData), 
+    contentType: "application/json", 
+    dataType: 'json'}).done(renderResult); 
+event.preventDefault();}$.get(config.formTemplateUrl, function(formTemplateSource) {   applyTemplate(formTemplateSource, config);   $('#ponderal-form').on('submit', submitForm); });}); })(jQuery);
+\end{minted}
+\begin{minted}[frame=none,framesep=1mm,fontsize=\tiny]{html}
+<h1>Ponderal Index Calculator</h1> <form id="ponderal-form"><label>Height<input type="number" id="height" name="height"step="0.01" value="{{defaultHeight}}" />m </label><label>Weight<input type="number" id="weight" name="weight"value="{{defaultWeight}}" />kg </label><button type="submit" id="calculate">Calculate</button> </form>
+
+<h1>Ponderal Index Calculator</h1> <p>{{#greater ponderal 14}}<strong class="bad">{{weight}} kg is too much</strong>{{else lower ponderal 11}}<strong class="bad">{{weight}} kg is too less</strong> 
+{{else}}<strong class="ok">{{weight}} kg is ok</strong> 
+{{/greater}}.
+
+\end{minted}
+\subsubsection{CSS Vererbung}
+\includegraphics[width=0.24\textwidth]{images/some}
+
 
 
 
